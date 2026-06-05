@@ -10,12 +10,14 @@ import Play from "./pages/Play";
 import NotFound from "./NotFound";
 import Blitz from "./components/Play/Blitz";
 import Normal from "./components/Play/Normal";
+import ScrollToTop from "./components/ScrollToTop";
 import { useTheme } from "./context/ThemeContext";
 
 function App() {
   const { theme } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col text-foreground">
+      <ScrollToTop />
       <div className="app-grid" aria-hidden="true" />
       <div className="app-glow" aria-hidden="true" />
       <Navbar />
