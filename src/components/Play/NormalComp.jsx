@@ -11,40 +11,38 @@ function NormalComp({ gameStatus, currLvl, currScore, highScore, reStartGame }) 
   };
   return (
     <>
-      <div className="flex flex-col">
-        {gameStatus ? (
-          <h2 className="text-2xl font-semibold text-center">
-            Level {currLvl}
-          </h2>
-        ) : (
-          <>
-            <h2 className="text-2xl font-semibold text-center">Game Over!</h2>
-            <h2 className="text-lg font-semibold text-center text-muted">
-              Previous Score: {currScore}
-            </h2>
-          </>
-        )}
+      {gameStatus ? (
+        <>
+          <span className="eyebrow">Level</span>
+          <p className="mt-1 font-mono text-5xl font-bold">{currLvl}</p>
+        </>
+      ) : (
+        <>
+          <span className="eyebrow">Game over</span>
+          <p className="mt-1 text-lg text-muted">
+            You reached level{" "}
+            <span className="text-foreground font-semibold">{currScore}</span>
+          </p>
+        </>
+      )}
+
+      <div className="mt-6 grid grid-cols-2 gap-3 text-left">
+        <div className="glass rounded-xl px-4 py-3">
+          <p className="text-xs text-muted">Current</p>
+          <p className="font-mono text-2xl font-bold">{currScore}</p>
+        </div>
+        <div className="glass rounded-xl px-4 py-3">
+          <p className="text-xs text-muted">Best</p>
+          <p className="font-mono text-2xl font-bold text-accent">{highScore}</p>
+        </div>
       </div>
-      <span className="flex flex-row justify-between mt-5 text-lg">
-        <p className="text-left text-muted">Current Score</p>
-        <p>{currScore}</p>
-      </span>
-      <span className="flex flex-row justify-between mt-1 text-lg">
-        <p className="text-left text-muted">Highest Score</p>
-        <p className="text-accent font-semibold">{highScore}</p>
-      </span>
-      <div className="flex flex-row justify-between">
-        <button
-          onClick={reStartGame}
-          className="bg-accent hover:bg-accent-hover text-white px-8 py-2 rounded-lg font-medium transition-colors mt-8 w-36 me-8"
-        >
+
+      <div className="mt-6 flex gap-3">
+        <button onClick={reStartGame} className="btn-primary flex-1">
           {gameStatus ? "Restart" : "Play Again"}
         </button>
-        <button
-          onClick={returnFn}
-          className="bg-card hover:border-accent border border-card-border text-foreground px-8 py-2 rounded-lg font-medium transition-colors mt-8"
-        >
-          Change Mode
+        <button onClick={returnFn} className="btn-secondary">
+          Modes
         </button>
       </div>
     </>

@@ -77,15 +77,7 @@ function Blitz() {
   };
 
   const btnPress = (e) => {
-    btnPressFn(
-      e,
-      start,
-      gameStatus,
-      userQueue,
-      setUserQueue,
-      colors,
-      setRandIdx
-    );
+    btnPressFn(e, start, gameStatus, userQueue, setUserQueue, colors, setRandIdx);
   };
 
   const isHighScore = () => {
@@ -142,40 +134,38 @@ function Blitz() {
     navigate("/play");
   };
   return (
-    <section className="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center justify-around mt-0">
-      {/* Color Box */}
+    <section className="container mx-auto py-16 md:py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20">
       <Color btnPress={btnPress} randIdx={randIdx} />
 
-      <div className="relative box-2 glass rounded-2xl px-8 py-10 mt-8 text-center">
-        <div className="flex flex-col justify-center">
-          {!start ? (
-            <>
-              <button
-                onClick={returnFn}
-                className="absolute right-4 -top-4 text-foreground hover:text-accent"
-              >
-                <Undo2 size={20} />
-              </button>
-              <h1 className="text-2xl font-semibold mb-2">Play Blitz Mode</h1>
-              <p className="text-muted">Score before 30s</p>
-              <button
-                onClick={startGame}
-                className="bg-accent hover:bg-accent-hover text-white px-8 py-2 rounded-lg font-medium transition-colors mt-8 w-40 mx-auto"
-              >
-                Play
-              </button>
-            </>
-          ) : (
-            <BlitzComp
-              gameStatus={gameStatus}
-              currScore={currScore}
-              highScore={highScore}
-              reStartGame={reStartGame}
-              time={formatTime(time)}
-              isRunning={isRunning}
-            />
-          )}
-        </div>
+      <div className="relative glass rounded-2xl px-8 py-10 text-center min-w-[18rem]">
+        {!start ? (
+          <>
+            <button
+              onClick={returnFn}
+              aria-label="Back to mode select"
+              className="absolute right-4 top-4 text-muted hover:text-accent transition-colors"
+            >
+              <Undo2 size={20} />
+            </button>
+            <span className="eyebrow">Blitz mode</span>
+            <h1 className="mt-3 text-2xl font-bold">Beat the clock</h1>
+            <p className="mt-2 text-sm text-muted">
+              Score as much as you can in 30 seconds.
+            </p>
+            <button onClick={startGame} className="btn-primary mt-8 w-full">
+              Play
+            </button>
+          </>
+        ) : (
+          <BlitzComp
+            gameStatus={gameStatus}
+            currScore={currScore}
+            highScore={highScore}
+            reStartGame={reStartGame}
+            time={formatTime(time)}
+            isRunning={isRunning}
+          />
+        )}
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 function Color({btnPress, randIdx}) {
   return (
     <>
-      <div className="color-box mt-8">
+      <div className="color-box">
         <div className="line1">
           <div
             onClick={btnPress}

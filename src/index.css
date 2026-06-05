@@ -2,29 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --ml-bg: #05050a;
-  --ml-fg: #f4f4f7;
-  --ml-accent: #8b5cf6;
-  --ml-muted: #a0a0b0;
-  --ml-card: rgba(10, 10, 15, 0.6);
-  --ml-card-border: rgba(255, 255, 255, 0.08);
+:root,
+.light {
+  --background: 250 250 250;
+  --foreground: 17 17 17;
+  --accent: 37 99 235;
+  --muted: 102 102 102;
+  --card: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --glow: rgba(37, 99, 235, 0.12);
+  --grid: rgba(0, 0, 0, 0.045);
+}
+
+.dark {
+  --background: 5 5 10;
+  --foreground: 244 244 247;
+  --accent: 139 92 246;
+  --muted: 160 160 176;
+  --card: rgba(12, 12, 18, 0.6);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --glow: rgba(139, 92, 246, 0.16);
+  --grid: rgba(255, 255, 255, 0.035);
 }
 
 html,
 body {
-  background-color: var(--ml-bg);
-  color: var(--ml-fg);
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
   font-family: "Geist", system-ui, sans-serif;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 @layer components {
   .glass {
-    background: var(--ml-card);
-    border: 1px solid var(--ml-card-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: border-color 0.25s ease, background-color 0.35s ease;
   }
+  .glass:hover {
+    border-color: rgb(var(--accent) / 0.4);
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-accent text-white px-6 py-3 rounded-xl font-medium transition-all hover:bg-accent/90 hover:shadow-glow;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border border-card-border text-foreground px-6 py-3 rounded-xl font-medium transition-colors hover:border-accent hover:text-accent;
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-accent;
+  }
+}
+
+/* Decorative app background (theme-aware) */
+.app-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 50%, transparent 100%);
+}
+.app-glow {
+  position: fixed;
+  top: -18rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64rem;
+  height: 44rem;
+  max-width: 100vw;
+  z-index: -2;
+  pointer-events: none;
+  background: radial-gradient(circle at center, var(--glow), transparent 70%);
 }
 
 ::-webkit-scrollbar {

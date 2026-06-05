@@ -69,15 +69,7 @@ function Normal() {
   };
 
   const btnPress = (e) => {
-    btnPressFn(
-      e,
-      start,
-      gameStatus,
-      userQueue,
-      setUserQueue,
-      colors,
-      setRandIdx
-    );
+    btnPressFn(e, start, gameStatus, userQueue, setUserQueue, colors, setRandIdx);
   };
 
   const isHighScore = () => {
@@ -105,39 +97,37 @@ function Normal() {
   };
 
   return (
-    <section className="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center justify-around mt-0">
-      {/* Color Box */}
+    <section className="container mx-auto py-16 md:py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20">
       <Color btnPress={btnPress} randIdx={randIdx} />
 
-      <div className="relative box-2 glass rounded-2xl px-8 py-10 mt-8 text-center">
-        <div className="flex flex-col justify-center">
-          {!start ? (
-            <>
-              <button
-                onClick={returnFn}
-                className="absolute right-4 -top-4 text-foreground hover:text-accent"
-              >
-                <Undo2 size={20} />
-              </button>
-              <h1 className="text-2xl font-semibold mb-2">Play Normal Mode</h1>
-              <p className="text-muted">Repeat all the Sequences</p>
-              <button
-                onClick={startGame}
-                className="bg-accent hover:bg-accent-hover text-white px-8 py-2 rounded-lg font-medium transition-colors mt-8 w-40 mx-auto"
-              >
-                Play
-              </button>
-            </>
-          ) : (
-            <NormalComp
-              gameStatus={gameStatus}
-              currScore={currScore}
-              currLvl={currLvl}
-              highScore={highScore}
-              reStartGame={reStartGame}
-            />
-          )}
-        </div>
+      <div className="relative glass rounded-2xl px-8 py-10 text-center min-w-[18rem]">
+        {!start ? (
+          <>
+            <button
+              onClick={returnFn}
+              aria-label="Back to mode select"
+              className="absolute right-4 top-4 text-muted hover:text-accent transition-colors"
+            >
+              <Undo2 size={20} />
+            </button>
+            <span className="eyebrow">Normal mode</span>
+            <h1 className="mt-3 text-2xl font-bold">Repeat the sequence</h1>
+            <p className="mt-2 text-sm text-muted">
+              It grows by one tile every round.
+            </p>
+            <button onClick={startGame} className="btn-primary mt-8 w-full">
+              Play
+            </button>
+          </>
+        ) : (
+          <NormalComp
+            gameStatus={gameStatus}
+            currScore={currScore}
+            currLvl={currLvl}
+            highScore={highScore}
+            reStartGame={reStartGame}
+          />
+        )}
       </div>
     </section>
   );

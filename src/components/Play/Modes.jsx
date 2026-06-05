@@ -1,38 +1,38 @@
-import { Undo2 } from "lucide-react";
+import { Undo2, Infinity as InfinityIcon, Timer } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 function Modes({ setGameMode }) {
   const navigate = useNavigate();
-  const BlitzFn = async () => {
-    await setGameMode("default");
-    navigate("/play/blitz");
-  };
-  const NormalFn = async () => {
-    await setGameMode("default");
-    navigate("/play/normal");
+  const go = (path) => {
+    setGameMode("default");
+    navigate(path);
   };
 
   return (
     <div className="relative">
       <button
         onClick={() => setGameMode("default")}
-        className="absolute right-4 -top-4 text-foreground hover:text-accent"
+        aria-label="Back"
+        className="absolute right-0 -top-2 text-muted hover:text-accent transition-colors"
       >
         <Undo2 size={20} />
       </button>
-      <h1 className="text-2xl font-semibold">Select Mode</h1>
-      <div className="flex flex-row justify-between">
+      <span className="eyebrow">Choose</span>
+      <h1 className="mt-2 text-2xl font-bold">Select a mode</h1>
+      <div className="mt-8 flex flex-col gap-3">
         <button
-          onClick={BlitzFn}
-          className="bg-card hover:border-accent border border-card-border w-44 text-foreground px-8 py-2 rounded-lg font-medium transition-colors mt-8 me-5"
+          onClick={() => go("/play/normal")}
+          className="btn-secondary w-full justify-start"
         >
-          Blitz Mode
+          <InfinityIcon className="h-5 w-5 text-accent" />
+          Normal Mode
         </button>
         <button
-          onClick={NormalFn}
-          className="bg-card hover:border-accent border border-card-border w-44 text-foreground px-8 py-2 rounded-lg font-medium transition-colors mt-8"
+          onClick={() => go("/play/blitz")}
+          className="btn-secondary w-full justify-start"
         >
-          Normal Mode
+          <Timer className="h-5 w-5 text-accent" />
+          Blitz Mode
         </button>
       </div>
     </div>
