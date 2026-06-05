@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ml-bg: #05050a;
+  --ml-fg: #f4f4f7;
+  --ml-accent: #8b5cf6;
+  --ml-muted: #a0a0b0;
+  --ml-card: rgba(10, 10, 15, 0.6);
+  --ml-card-border: rgba(255, 255, 255, 0.08);
+}
+
+html,
+body {
+  background-color: var(--ml-bg);
+  color: var(--ml-fg);
+  font-family: "Geist", system-ui, sans-serif;
+}
+
+@layer components {
+  .glass {
+    background: var(--ml-card);
+    border: 1px solid var(--ml-card-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
